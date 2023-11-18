@@ -1,2 +1,8 @@
-package it.saimao.springmvc.repositories;public interface ClubRepository {
+package it.saimao.springmvc.repositories;
+
+import it.saimao.springmvc.models.Club;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ClubRepository extends JpaRepository<Club, Long> {
+
 }
