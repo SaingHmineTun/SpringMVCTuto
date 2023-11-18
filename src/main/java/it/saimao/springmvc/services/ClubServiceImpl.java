@@ -21,4 +21,10 @@ public class ClubServiceImpl implements ClubService {
         List<Club> clubs = clubRepository.findAll();
         return clubs.stream().map(clubMapper::clubToClubDto).toList();
     }
+
+    @Override
+    public ClubDto save(ClubDto club) {
+        Club savedClub = clubRepository.save(clubMapper.clubDtoToClub(club));
+        return clubMapper.clubToClubDto(savedClub);
+    }
 }

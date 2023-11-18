@@ -11,11 +11,12 @@
                 <h1 class="fw-bolder">Runners near you</h1>
                 <p class="lead fw-normal text-muted mb-0">Runners found in your area</p>
             </div>
-            <div class="row gx-5" th:each="club: ${clubs}">
-                <div class="col-lg-6">
-                    <div class="position-relative mb-5">
+            <div class="row">
+                <div class="col-lg-6" th:each="club: ${clubs}">
+                    <div class="mb-5">
                         <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}"
                              alt="..."/>
+                        <br>
                         <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
                 </div>
