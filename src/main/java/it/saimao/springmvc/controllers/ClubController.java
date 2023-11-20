@@ -65,4 +65,10 @@ public class ClubController {
         return "club-detail";
     }
 
+    @GetMapping("/{clubId}/delete")
+    public String deleteClub(@PathVariable("clubId") Long id) {
+        clubService.deleteById(id);
+        return "redirect:/clubs";
+    }
+
 }
