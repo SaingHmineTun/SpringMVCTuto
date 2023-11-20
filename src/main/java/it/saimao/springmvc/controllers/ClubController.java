@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,14 +49,20 @@ public class ClubController {
     @PostMapping("/{clubId}/edit")
     public String updateClub(@PathVariable Long clubId, @ModelAttribute @Valid ClubDto clubDto, BindingResult bindingResult) {
 
+        clubDto.setId(clubId);
         if (bindingResult.hasErrors()) {
+
             return "clubs-edit";
         }
-
-        clubDto.setId(clubId);
         clubService.updateClub(clubDto);
         return "redirect:/clubs";
+    }
 
+    @GetMapping("/{clubId}")
+    public String clubDetail(@PathVariable("clubId") Long id, Model model) {
+        ClubDto clubDto = clubService.findById(id);
+        model.addAttribute("club", clubDto);
+        return "club-detail";
     }
 
 }
