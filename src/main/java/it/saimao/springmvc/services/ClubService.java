@@ -11,4 +11,6 @@ public interface ClubService {
     ClubDto save(ClubDto club);
 
     ClubDto findById(Long id);
+
+    void updateClub(ClubDto clubDto);
 }

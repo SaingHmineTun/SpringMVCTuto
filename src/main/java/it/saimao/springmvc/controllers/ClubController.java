@@ -1,15 +1,12 @@
 package it.saimao.springmvc.controllers;
 
 import it.saimao.springmvc.dto.ClubDto;
-import it.saimao.springmvc.models.Club;
 import it.saimao.springmvc.services.ClubService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,9 +33,7 @@ public class ClubController {
 
     @PostMapping("/new")
     public String saveClub(@ModelAttribute @Valid ClubDto clubDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "clubs-create";
-        }
+
         clubService.save(clubDto);
         return "redirect:/clubs";
     }
@@ -46,9 +41,21 @@ public class ClubController {
     @GetMapping("/{clubId}/edit")
     public String edit(@PathVariable("clubId") Long id, Model model) {
         ClubDto clubDto = clubService.findById(id);
-        if (clubDto != null) {
-            model.addAttribute("club", clubDto);
-        }
-        return "clubs-create";
+        model.addAttribute("club", clubDto);
+        return "clubs-edit";
     }
+
+    @PostMapping("/{clubId}/edit")
+    public String updateClub(@PathVariable Long clubId, @ModelAttribute @Valid ClubDto clubDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "clubs-edit";
+        }
+
+        clubDto.setId(clubId);
+        clubService.updateClub(clubDto);
+        return "redirect:/clubs";
+
+    }
+
 }

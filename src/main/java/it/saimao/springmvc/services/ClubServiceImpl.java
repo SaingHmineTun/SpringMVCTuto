@@ -34,4 +34,10 @@ public class ClubServiceImpl implements ClubService {
         ClubDto clubDto = clubMapper.clubToClubDto(club);
         return clubDto;
     }
+
+    @Override
+    public void updateClub(ClubDto clubDto) {
+        Club club = clubRepository.save(clubMapper.clubDtoToClub(clubDto));
+
+    }
 }

@@ -15,14 +15,11 @@ import java.time.LocalDateTime;
 @Data
 public class ClubDto {
     private Long id;
-    @NotBlank
-    @NotEmpty(message = "Title must not be empty")
+    @NotEmpty(message = "Club title must not be empty")
     private String title;
-    @NotBlank
     @NotEmpty(message = "Club photo must not be empty")
     private String photoUrl;
-    @NotBlank
-    @NotEmpty(message = "Club empty must not be empty")
+    @NotEmpty(message = "Club content empty must not be empty")
     private String content;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
